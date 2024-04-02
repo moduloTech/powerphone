@@ -1,0 +1,17 @@
+version: '3.7'
+
+services:
+  app:
+    image: modulotechgroup/powerphone:dev
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '3000:3000'
+    volumes:
+      - .:/app
+    environment:
+      RAILS_ENV: development
+      URL: http://localhost:3000
+    stdin_open: true
+    tty: true
