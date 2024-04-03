@@ -1,0 +1,13 @@
+<h1><%= translate('powerphone.configuration.title') %></h1>
+<%= form_with(model: @configuration, url: configuration_path, class: 'd-flex flex-column flex-md-row flex-wrap gap-2') do |form| %>
+  <% { sip: %i[sip_domain], wss: %i[wss_server wss_port wss_path] }.each do |fieldset, attributes| %>
+    <fieldset class="flex-grow-1">
+      <legend><%= translate("powerphone.configuration.fieldset_#{fieldset}.legend") %></legend>
+      <% attributes.each do |attribute| %>
+        <%= form.label attribute, translate("powerphone.configuration.fieldset_#{fieldset}.#{attribute}.label") %>
+        <%= form.text_field attribute, class: 'form-control', placeholder: translate("powerphone.configuration.fieldset_#{fieldset}.#{attribute}.placeholder") %>
+      <% end %>
+    </fieldset>
+  <% end %>
+  <%= form.button(translate('powerphone.configuration.primary_button'), type: :submit, class: 'btn btn-primary flex-basis-100') %>
+<% end %>

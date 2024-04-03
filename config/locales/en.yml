@@ -1,0 +1,31 @@
+en:
+  activerecord:
+    attributes:
+      configuration:
+        sip_domain: SIP domain
+        wss_path: WebSocket server path
+        wss_port: WebSocket server port
+        wss_server: WebSocket server hostname
+  powerphone:
+    back_to_host: Back
+    configuration:
+      fieldset_sip:
+        legend: SIP configuration
+        sip_domain:
+          label: Domain
+          placeholder: ipbx.mydomain.com
+      fieldset_wss:
+        legend: WebSocket configuration
+        wss_path:
+          label: Path
+          placeholder: /ws
+        wss_port:
+          label: Port
+          placeholder: 443
+        wss_server:
+          label: Server
+          placeholder: ipbx.mydomain.com
+      primary_button: Save
+      title: Configuration
+  exceptions:
+    action_controller/parameter_missing: Paramètre '%{param}' is missing or its value is empty.

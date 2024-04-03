@@ -5,11 +5,18 @@
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
 
-  <%= stylesheet_link_tag    "powerphone/application", media: "all" %>
+  <%= stylesheet_link_tag("powerphone/application", media: "all", "data-turbo-track": "reload") %>
+  <%= javascript_importmap_tags('powerphone/application') %>
 </head>
+
 <body>
-
-<%= yield %>
-
+<div class="container-fluid">
+  <%= link_to Rails.application.routes.url_helpers.root_path do %>
+    <%= fa_icon_tag('arrow-left') %>
+    <%= translate('powerphone.back_to_host') %>
+  <% end %>
+  <%= render partial: 'powerphone/flashes' %>
+  <%= yield %>
+</div>
 </body>
 </html>

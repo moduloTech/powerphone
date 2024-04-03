@@ -15,4 +15,4 @@ COPY . .
 
 EXPOSE 3000
 
-CMD ["./bin/rake", "stats"]
+CMD ["./bin/rake"]

@@ -1,0 +1,11 @@
+<% if @error %>
+  <% case @error %>
+  <% when ActionController::ParameterMissing %>
+    <%= turbo_stream.append(:flashes, partial: '/admin/flashes/alert', locals: { message: translate("exceptions.#{@error.class.name.underscore}", param: @error.param) }) %>
+  <% when ActiveRecord::RecordInvalid %>
+    <turbo-stream action="resetDisplayError"></turbo-stream>
+    <% @error.record.errors.each do |error| %>
+      <turbo-stream action="displayError" target="<%= @error.record.class.name.underscore.gsub(/powerphone\//, '') %>_<%= error.attribute %>" message="<%= error.full_message %>"></turbo-stream>
+    <% end %>
+  <% end %>
+<% end %>

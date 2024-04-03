@@ -14,4 +14,7 @@ gem 'rubocop', '~> 1.62', '>= 1.62.1'
 gem 'rubocop-rails', '~> 2.24', '>= 2.24.1'
 
 # Start debugger with binding.b [https://github.com/ruby/debug]
-# gem "debug", ">= 1.0.0"
+gem "debug", ">= 1.0.0"
+
+gem 'importmap-rails', '~> 1.2', '>= 1.2.3'
+gem 'turbo-rails', '~> 2.0', '>= 2.0.5'

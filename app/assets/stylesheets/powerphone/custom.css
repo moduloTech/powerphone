@@ -1,0 +1,47 @@
+.btn {
+  & svg {
+    width: 16px;
+    height: 16px;
+
+    & path {
+      fill: white;
+    }
+  }
+
+  &.btn-outline-primary,
+  &.btn-outline-secondary,
+  &.btn-outline-success,
+  &.btn-outline-danger,
+  &.btn-outline-warning,
+  &.btn-outline-info,
+  &.btn-outline-light,
+  &.btn-outline-dark {
+    & path {
+      fill: var(--bs-btn-color);
+    }
+  }
+
+  &.btn-outline-primary:hover,
+  &.btn-outline-secondary:hover,
+  &.btn-outline-success:hover,
+  &.btn-outline-danger:hover,
+  &.btn-outline-warning:hover,
+  &.btn-outline-info:hover,
+  &.btn-outline-light:hover,
+  &.btn-outline-dark:hover {
+    & path {
+      fill: white;
+    }
+  }
+}
+
+a {
+  & svg {
+    width: 16px;
+    height: 16px;
+
+    & path {
+      fill: rgba(var(--bs-link-color-rgb),var(--bs-link-opacity,1));
+    }
+  }
+}

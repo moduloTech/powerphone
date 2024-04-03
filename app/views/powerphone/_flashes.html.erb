@@ -1,0 +1,8 @@
+<div id="flashes">
+  <% if notice %>
+    <%= render partial: '/flashes/notice', locals: { message: notice } %>
+  <% end %>
+  <% if alert %>
+    <%= render partial: '/flashes/alert', locals: { message: alert } %>
+  <% end %>
+</div>

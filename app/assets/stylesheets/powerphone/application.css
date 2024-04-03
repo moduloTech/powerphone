@@ -13,3 +13,18 @@
  *= require_tree .
  *= require_self
  */
+
+@import url('vendor/bootstrap.css');
+@import url('custom.css');
+
+.flex-basis-100 {
+  flex-basis: 100%;
+}
+
+.display-error {
+  color: red;
+  border: 1px solid red;
+}
+.display-error-message {
+  color: red;
+}
