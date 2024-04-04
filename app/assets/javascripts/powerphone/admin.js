@@ -1,16 +1,16 @@
 // Configure your import map in config/importmap.rb. Read more: https://github.com/rails/importmap-rails
-import "@hotwired/turbo-rails"
-import "@popperjs/core"
-import * as bootstrap from "bootstrap";
-import {htmlNodeFromText, setWithDefault, UUIDv4} from "powerphone/utilities";
+import { Turbo } from '@hotwired/turbo-rails'
+import '@popperjs/core'
+import * as bootstrap from 'bootstrap'
+import { htmlNodeFromText, setWithDefault, UUIDv4 } from 'powerphone/utilities'
 
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener('DOMContentLoaded', function () {
   // Initialize popovers
-  let popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'));
-  let popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+  const popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+  popoverTriggerList.map(function (popoverTriggerEl) {
     return new bootstrap.Popover(popoverTriggerEl)
-  });
-});
+  })
+})
 
 //
 // <turbo-stream action="displayError" target="sip_domain"></turbo-stream>
@@ -21,7 +21,7 @@ Turbo.StreamActions.displayError = function () {
   const message = setWithDefault(this.getAttribute('message'), 'Unknown error')
 
   this.targetElements.forEach((element) => {
-    const elementId = setWithDefault(element.id, new UUIDv4.generate())
+    const elementId = setWithDefault(element.id, UUIDv4.generate())
 
     // If there was no id, now, there is!
     element.id = elementId
@@ -29,13 +29,13 @@ Turbo.StreamActions.displayError = function () {
     const errorId = `${elementId}_error`
     element.classList.add('display-error')
 
-    const errorElement = document.getElementById(errorId);
+    const errorElement = document.getElementById(errorId)
     if (errorElement) {
       errorElement.innerText = message
     } else {
       element.after(htmlNodeFromText(`<div id="${errorId}" class="form-text display-error-message">${message}</div>`))
     }
-  });
+  })
 }
 
 //

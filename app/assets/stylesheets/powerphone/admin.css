@@ -1,0 +1,75 @@
+/*
+ * This is a manifest file that'll be compiled into admin.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_self
+ *= require_tree ./admin
+ */
+
+.btn {
+  & svg {
+    width: 16px;
+    height: 16px;
+
+    & path {
+      fill: white;
+    }
+  }
+
+  &.btn-outline-primary,
+  &.btn-outline-secondary,
+  &.btn-outline-success,
+  &.btn-outline-danger,
+  &.btn-outline-warning,
+  &.btn-outline-info,
+  &.btn-outline-light,
+  &.btn-outline-dark {
+    & path {
+      fill: var(--bs-btn-color);
+    }
+  }
+
+  &.btn-outline-primary:hover,
+  &.btn-outline-secondary:hover,
+  &.btn-outline-success:hover,
+  &.btn-outline-danger:hover,
+  &.btn-outline-warning:hover,
+  &.btn-outline-info:hover,
+  &.btn-outline-light:hover,
+  &.btn-outline-dark:hover {
+    & path {
+      fill: white;
+    }
+  }
+}
+
+a {
+  & svg {
+    width: 16px;
+    height: 16px;
+
+    & path {
+      fill: rgba(var(--bs-link-color-rgb),var(--bs-link-opacity,1));
+    }
+  }
+}
+
+.flex-basis-100 {
+  flex-basis: 100%;
+}
+
+.display-error {
+  color: red;
+  border: 1px solid red;
+}
+.display-error-message {
+  color: red;
+}

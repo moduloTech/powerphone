@@ -1,8 +1,6 @@
 module Powerphone
 
-  class ConfigurationsController < ApplicationController
-
-    before_action :fetch_configuration, only: %i[show update]
+  class ConfigurationsController < AdminController
 
     def show
     end
@@ -23,10 +21,6 @@ module Powerphone
     end
 
     private
-
-    def fetch_configuration
-      @configuration = Powerphone::Configuration.fetch
-    end
 
     def update_params
       params.require(:configuration).permit(:sip_domain, :wss_server, :wss_path, :wss_port)

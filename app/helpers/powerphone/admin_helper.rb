@@ -1,6 +1,6 @@
 module Powerphone
 
-  module ApplicationHelper
+  module AdminHelper
   end
 
 end

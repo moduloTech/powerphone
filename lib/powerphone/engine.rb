@@ -11,28 +11,58 @@ module Powerphone
       app.config.importmap.paths += [Engine.root.join('config/importmap.rb')]
     end
 
-    initializer "powerphone-engine.assets" do |app|
+    initializer 'powerphone-engine.assets' do |app|
       app.config.assets.precompile += %w[powerphone_manifest.js]
     end
+
+    initializer 'powerphone-engine.public_assets' do |app|
+      app.config.app_middleware.use(
+        Rack::Static,
+        urls: %w[/powerphone-assets],
+        root: Engine.root.join('public')
+      )
+    end
+
   end
 
   Action = Struct.new(:options, :block)
 
   class EngineConfiguration
 
-    def initialize(before_actions: [], around_actions: [], after_actions: [])
-      super()
+    class Callbackable
 
-      self.before_actions = before_actions
-      self.around_actions = around_actions
-      self.after_actions = after_actions
+      def initialize
+        super()
+
+        @before_actions = []
+        @around_actions = []
+        @after_actions = []
+      end
+
+      attr_reader :before_actions, :around_actions, :after_actions
+
+      def before_action(options={}, &block)
+        @before_actions << Action.new(options, block)
+      end
+
+      def around_action(options={}, &block)
+        @around_actions << Action.new(options, block)
+      end
+
+      def after_action(options={}, &block)
+        @after_actions << Action.new(options, block)
+      end
+
     end
 
-    attr_reader :before_actions, :around_actions, :after_actions
+    def initialize
+      super()
 
-    private
+      @admin = Callbackable.new
+      @phone = Callbackable.new
+    end
 
-    attr_writer :before_actions, :around_actions, :after_actions
+    attr_reader :admin, :phone
 
   end
 
@@ -44,35 +74,23 @@ module Powerphone
       builder = new
       yield builder
 
-      Powerphone.configuration = builder.build_config
+      Powerphone.configuration = builder.config
     end
 
     def initialize
       super()
 
-      @before_actions = []
-      @around_actions = []
-      @after_actions = []
+      @config = EngineConfiguration.new
     end
 
-    def build_config
-      EngineConfiguration.new(
-        before_actions: @before_actions,
-        around_actions: @around_actions,
-        after_actions:  @after_actions
-      )
+    attr_reader :config
+
+    def admin
+      @config.admin
     end
 
-    def before_action(options={}, &block)
-      @before_actions << Action.new(options, block)
-    end
-
-    def around_action(options={}, &block)
-      @around_actions << Action.new(options, block)
-    end
-
-    def after_action(options={}, &block)
-      @after_actions << Action.new(options, block)
+    def phone
+      @config.phone
     end
 
   end

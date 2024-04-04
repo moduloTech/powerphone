@@ -4,6 +4,10 @@ ENV RAILS_ENV=development
 ENV EDITOR=vim
 WORKDIR /app
 
+RUN apt update
+RUN apt -y install nodejs npm
+RUN npm install standard --global
+
 RUN gem install bundler -v 2.5.7
 
 RUN mkdir -p lib/powerphone
