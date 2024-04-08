@@ -28,4 +28,8 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency 'importmap-rails', '~> 1.2', '>= 1.2.3'
   spec.add_dependency 'turbo-rails', '~> 2.0', '>= 2.0.5'
+
+  spec.add_dependency 'dry-initializer', '~> 3.1', '>= 3.1.1'
+  spec.add_dependency 'dry-types', '~> 1.7', '>= 1.7.2'
+  spec.add_dependency 'httparty', '~> 0.21'
 end
