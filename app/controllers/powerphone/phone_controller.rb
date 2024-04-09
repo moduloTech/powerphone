@@ -11,6 +11,9 @@ module Powerphone
     def index
     end
 
+    def configuration
+    end
+
     private
 
     def fetch_configuration

@@ -26,20 +26,8 @@
   <script type="text/javascript">
     // Provision runtime options can go here.
     const phoneOptions = {
-      loadAlternateLang: true,
-      EnableAccountSettings: false,
-      VoiceMailSubscribe: false,
-      hostingPrefix: '/powerphone-assets/',
-      ServerPath: '<%= @configuration.wss_path %>',
-      SipDomain: '<%= @configuration.sip_domain %>',
-      wssServer: '<%= @configuration.wss_server %>',
-      WebSocketPort: '<%= @configuration.wss_port %>'
+      mountingPoint: '<%= Powerphone::Engine.routes.find_script_name({}) %>'
     }
-
-    // Occurs after the language file is loaded
-    document.addEventListener("language_pack_loaded", function (lang) {
-      console.log("web_hook_on_language_pack_loaded", lang);
-    });
   </script>
 </head>
 
