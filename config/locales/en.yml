@@ -28,4 +28,7 @@ en:
       primary_button: Save
       title: Configuration
   exceptions:
-    action_controller/parameter_missing: Paramètre '%{param}' is missing or its value is empty.
+    action_controller/parameter_missing: Parameter '%{param}' is missing or its value is empty.
+    argument_error_block_required: A block is needed for `Powerphone.configure`.
+    powerphone/errors/configuration_required_error: The configuration key '%{name}' is required to work.
+    type_error: "Doit être un des types : %{type}"

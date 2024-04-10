@@ -743,8 +743,8 @@ $(document).ready(async function () {
     if (options.SelectRingingLine !== undefined) {
       SelectRingingLine = options.SelectRingingLine
     }
-    if (options.UiMaxWidth !== undefined) {
-      UiMaxWidth = options.UiMaxWidth
+    if (options.uiMaxWidth !== undefined) {
+      UiMaxWidth = options.uiMaxWidth
     }
     if (options.UiThemeStyle !== undefined) {
       UiThemeStyle = options.UiThemeStyle

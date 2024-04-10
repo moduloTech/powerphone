@@ -29,3 +29,6 @@ fr:
       title: Configuration
   exceptions:
     action_controller/parameter_missing: Le paramètre '%{param}' est manquant ou sa valeur est vide.
+    argument_error_block_required: Un bloc est requis pour `Powerphone.configure`.
+    powerphone/errors/configuration_required_error: La clé de configuration '%{name}' est requise pour fonctionner.
+    type_error: "Doit être un des types : %{type}"

@@ -1,6 +1,11 @@
 require 'importmap-rails'
 require 'turbo-rails'
 
+require 'powerphone/errors/configuration_required_error'
+
+require 'powerphone/config/engine_configuration'
+require 'powerphone/config/configurator'
+
 module Powerphone
 
   class Engine < ::Rails::Engine
@@ -25,90 +30,20 @@ module Powerphone
 
   end
 
-  Action = Struct.new(:options, :block)
-
-  class EngineConfiguration
-
-    class Callbackable
-
-      def initialize
-        super()
-
-        @before_actions = []
-        @around_actions = []
-        @after_actions = []
-      end
-
-      attr_reader :before_actions, :around_actions, :after_actions
-
-      def before_action(options={}, &block)
-        @before_actions << Action.new(options, block)
-      end
-
-      def around_action(options={}, &block)
-        @around_actions << Action.new(options, block)
-      end
-
-      def after_action(options={}, &block)
-        @after_actions << Action.new(options, block)
-      end
-
-    end
-
-    def initialize
-      super()
-
-      @admin = Callbackable.new
-      @phone = Callbackable.new
-    end
-
-    attr_reader :admin, :phone
-
-  end
-
-  class Configurator
-
-    def self.configure
-      raise ArgumentError.new('A block is needed for Powerphone.configure') unless block_given?
-
-      builder = new
-      yield builder
-
-      Powerphone.configuration = builder.config
-    end
-
-    def initialize
-      super()
-
-      @config = EngineConfiguration.new
-    end
-
-    attr_reader :config
-
-    def admin
-      @config.admin
-    end
-
-    def phone
-      @config.phone
-    end
-
-  end
-
   class << self
 
     def configure(&block)
-      Configurator.configure(&block)
+      Config::Configurator.configure(&block)
     end
 
     def configuration
-      @configuration ||= EngineConfiguration.new
+      @configuration ||= Config::EngineConfiguration.new
     end
 
     def configuration=(configuration)
-      unless configuration.is_a?(EngineConfiguration)
+      unless configuration.is_a?(Config::EngineConfiguration)
         raise ArgumentError,
-              'configuration must be a Powerphone::EngineConfiguration'
+              'configuration must be a Powerphone::Config::EngineConfiguration'
       end
 
       @configuration = configuration
