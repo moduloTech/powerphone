@@ -52,6 +52,22 @@ module Powerphone
         @mounting_point_options = block
       end
 
+      def route_options(caller)
+        options = if mounting_point_options.respond_to?(:call)
+                    caller.instance_eval(&mounting_point_options)
+                  else
+                    mounting_point_options
+                  end
+
+        options.presence || {}
+      rescue ActionController::UrlGenerationError => e
+        raise Powerphone::Errors::ConfigurationRequiredError.new('mounting_point_options', e)
+      end
+
+      def mounting_point(caller)
+        Powerphone::Engine.routes.find_script_name(route_options(caller))
+      end
+
       def parent_controller=(parent_controller)
         case parent_controller
         when String, Class

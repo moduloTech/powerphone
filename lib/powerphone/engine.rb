@@ -49,6 +49,10 @@ module Powerphone
       @configuration = configuration
     end
 
+    def route(caller, route, ...)
+      Powerphone::Engine.routes.url_helpers.public_send(route, configuration.route_options(caller).merge(...))
+    end
+
   end
 
 end

@@ -15,5 +15,4 @@ require 'powerphone/freepbx/requests/authorization_request'
 require 'powerphone/freepbx/requests/fetch_all_core_users_request'
 
 module Powerphone
-  # Your code goes here...
 end
