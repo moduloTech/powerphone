@@ -6223,7 +6223,9 @@ function VideoCall (lineObj, dialledNumber, extraHeaders) {
 
 function AudioCallMenu (buddy, obj) {
   const buddyObj = FindBuddyByIdentity(buddy)
-  if (buddyObj === null) return
+  if (buddyObj === null) {
+    return
+  }
 
   const items = []
   if (buddyObj.type === 'extension' || buddyObj.type === 'xmpp') {
@@ -8208,7 +8210,9 @@ function UnmuteSession (lineNum) {
 
 function endSession (lineNum) {
   const lineObj = FindLineByNumber(lineNum)
-  if (lineObj === null || lineObj.SipSession === null) return
+  if (lineObj === null || lineObj.SipSession === null) {
+    return
+  }
 
   console.log('Ending call with: ' + lineNum)
   lineObj.SipSession.data.terminateby = 'us'
@@ -9373,7 +9377,9 @@ function SelectLine (lineNum) {
 
 function FindLineByNumber (lineNum) {
   for (let l = 0; l < Lines.length; l++) {
-    if (Lines[l].LineNumber === lineNum) return Lines[l]
+    if (Lines[l].LineNumber.toString() === lineNum.toString()) {
+      return Lines[l]
+    }
   }
   return null
 }
