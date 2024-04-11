@@ -42,9 +42,10 @@ module Powerphone
         @mounting_point_options = nil
         @parent_controller = nil
         @custom_stylesheet = nil
+        @custom_javascript = nil
       end
 
-      attr_reader :admin, :phone, :custom_stylesheet
+      attr_reader :admin, :phone, :custom_stylesheet, :custom_javascript
 
       def mounting_point_options(&block)
         return @mounting_point_options if block.nil?
@@ -83,6 +84,17 @@ module Powerphone
           @custom_stylesheet = custom_stylesheet
         when Symbol
           @custom_stylesheet = custom_stylesheet.to_s
+        else
+          raise TypeError, I18n.t('exceptions.type_error', type: '[String, Symbol]')
+        end
+      end
+
+      def custom_javascript=(custom_javascript)
+        case custom_javascript
+        when String
+          @custom_javascript = custom_javascript
+        when Symbol
+          @custom_javascript = custom_javascript.to_s
         else
           raise TypeError, I18n.t('exceptions.type_error', type: '[String, Symbol]')
         end

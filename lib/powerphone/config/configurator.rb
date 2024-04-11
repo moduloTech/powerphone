@@ -31,7 +31,7 @@ module Powerphone
         @config.phone
       end
 
-      delegate :mounting_point_options, :parent_controller=, :custom_stylesheet=, to: :config
+      delegate :mounting_point_options, :parent_controller=, :custom_stylesheet=, :custom_javascript=, to: :config
 
     end
 
