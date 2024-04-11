@@ -23,7 +23,7 @@ module Powerphone
     initializer 'powerphone-engine.public_assets' do |app|
       app.config.app_middleware.use(
         Rack::Static,
-        urls: %w[/powerphone-assets],
+        urls: %w[/powerphone-assets /powerphone-admin],
         root: Engine.root.join('public')
       )
     end
