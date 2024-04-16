@@ -5423,7 +5423,7 @@ function SendChatMessage (buddy) {
   $('#contact-' + buddy + '-emoji-menu').hide()
   $('#contact-' + buddy + '-ChatMessage').focus()
 
-  if (buddyObj.recognition !== null) {
+  if (buddyObj.recognition !== null && buddyObj.recognition !== undefined) {
     buddyObj.recognition.abort()
     buddyObj.recognition = null
   }
@@ -12049,10 +12049,11 @@ function ShowDictate (buddy) {
     return
   }
 
-  if (buddyObj.recognition !== null) {
+  if (buddyObj.recognition !== null && buddyObj.recognition !== undefined) {
     buddyObj.recognition.abort()
     buddyObj.recognition = null
   }
+
   try {
     // Limitation: This object can only be made once on the page
     // Generally this is fine, as you can only really dictate one message at a time.
