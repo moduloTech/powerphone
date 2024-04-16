@@ -1409,7 +1409,7 @@ function AddSomeoneWindow (_numberStr) {
           dateNow,
           $('#AddSomeone_Desc').val(),
           $('#AddSomeone_Email').val(),
-          jid,
+          null,
           $('#AddSomeone_Dnd').is(':checked'),
           $AddSomeoneSubscribe.is(':checked'),
           $AddSomeoneSubscribeUser.val(),
