@@ -845,8 +845,8 @@ async function fetchOptions() {
     if (options.BuddyShowExtenNum !== undefined) {
       BuddyShowExtenNum = options.BuddyShowExtenNum
     }
-    if (options.EnableTextMessaging !== undefined) {
-      EnableTextMessaging = options.EnableTextMessaging
+    if (options.enableTextMessaging !== undefined) {
+      EnableTextMessaging = options.enableTextMessaging
     }
     if (options.DisableFreeDial !== undefined) {
       DisableFreeDial = options.DisableFreeDial
@@ -887,8 +887,8 @@ async function fetchOptions() {
     if (options.EnableAlphanumericDial !== undefined) {
       EnableAlphanumericDial = options.EnableAlphanumericDial
     }
-    if (options.EnableVideoCalling !== undefined) {
-      EnableVideoCalling = options.EnableVideoCalling
+    if (options.enableVideoCalling !== undefined) {
+      EnableVideoCalling = options.enableVideoCalling
     }
     if (options.EnableTextExpressions !== undefined) {
       EnableTextExpressions = options.EnableTextExpressions
@@ -2661,7 +2661,9 @@ function ReceiveCall (session) {
   // First Determine Identity from From
   let callerID = session.remoteIdentity.displayName
   let did = session.remoteIdentity.uri.user
-  if (typeof callerID === 'undefined') callerID = did
+  if (typeof callerID === 'undefined') {
+    callerID = did
+  }
 
   const sipHeaders = session.incomingInviteRequest.message.headers
   // If a P-Asserted-Identity is parsed, use that
@@ -5332,8 +5334,12 @@ function InitialiseStream (buddy) {
 }
 
 function SendChatMessage (buddy) {
-  if (userAgent === null) return
-  if (!userAgent.isRegistered()) return
+  if (userAgent === null) {
+    return
+  }
+  if (!userAgent.isRegistered()) {
+    return
+  }
 
   $('#contact-' + buddy + '-ChatMessage').focus() // refocus on the textarea
 
