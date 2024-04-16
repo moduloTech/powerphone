@@ -5,6 +5,7 @@ module Powerphone
   module Config
 
     Action = Struct.new(:options, :block)
+    SipUser = Struct.new(:profile_name, :password, :extension, :profile_id)
 
     class EngineConfiguration
 
@@ -34,11 +35,34 @@ module Powerphone
 
       end
 
+      class PhoneCallbackable < Callbackable
+
+        def initialize
+          super()
+
+          @sip_user_evaluator = nil
+        end
+
+        def sip_user(caller=nil, &block)
+          if block.nil?
+            sip_user = SipUser.new
+            caller.instance_exec(sip_user, &@sip_user_evaluator)
+            # TODO: Validate the block and raise if an option is missing.
+            sip_user
+          elsif caller.nil?
+            @sip_user_evaluator = block
+          else
+            raise ArgumentError, 'wrong number of arguments (given 1, expected 0 when block given)'
+          end
+        end
+
+      end
+
       def initialize
         super()
 
         @admin = Callbackable.new
-        @phone = Callbackable.new
+        @phone = PhoneCallbackable.new
         @mounting_point_options = nil
         @parent_controller = nil
         @custom_stylesheet = nil

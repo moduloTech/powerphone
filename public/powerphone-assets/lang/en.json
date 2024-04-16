@@ -8,7 +8,6 @@
     "do_no_disturb" : "Do Not Disturb",
     "call_waiting" : "Call Waiting",
     "record_all_calls" : "Record All Calls",
-    "logout": "Log out",
     "extension_number" : "Extension Number",
     "email" : "Email",
     "mobile" : "Mobile",
@@ -307,6 +306,5 @@
     "pin_to_top" : "Pinned",
     "voice_mail" : "VoiceMail",
     "you_have_new_voice_mail" : "You have {0} new VoiceMail messages.",
-    "new_voice_mail" : "New VoiceMail Message",
-"select_user_profile" : "Select your user profile"
+    "new_voice_mail" : "New VoiceMail Message"
 }

@@ -18,6 +18,7 @@ class Powerphone::PhoneController < Powerphone.configuration.parent_controller
     @configuration = Powerphone::Configuration.fetch
     @engine_config = Powerphone.configuration
     @mounting_point = @engine_config.mounting_point(self)
+    @sip_user = @engine_config.phone.sip_user(self)
   end
 
 end

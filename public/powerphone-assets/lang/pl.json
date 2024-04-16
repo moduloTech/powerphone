@@ -8,7 +8,6 @@
     "do_no_disturb" : "Nie przeszkadzać",
     "call_waiting" : "Połączenia oczekujące",
     "record_all_calls" : "Nagrywaj wszystkie rozmowy",
-    "logout": "Log out",
     "extension_number" : "Numer telefonu",
     "email" : "E-mail",
     "mobile" : "Tel. komórkowy",
@@ -307,6 +306,5 @@
     "pin_to_top" : "Przypięte",
     "voice_mail" : "Poczta głosowa",
     "you_have_new_voice_mail" : "Masz {0} nowych wiadomości poczty głosowej.",
-    "new_voice_mail" : "Nowa wiadomość na poczcie głosowej",
-"select_user_profile" : "Sélectionnez votre profil utilisateur"
+    "new_voice_mail" : "Nowa wiadomość na poczcie głosowej"
 }

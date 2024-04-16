@@ -26,8 +26,6 @@ const navUserAgent = window.navigator.userAgent // TODO: change to Navigator.use
 const instanceID = String(Date.now())
 const localDB = window.localStorage
 
-let welcomeScreen = null
-
 /**
  * Language Packs (lang/xx.json)
  * Note: The following should correspond to files on your server.
@@ -62,7 +60,7 @@ let wallpaperDark = getDbItem('wallpaperDark', 'wallpaper.dark.webp')
  * index.html for some sample provisioning and web_hook options.
  */
 // Internal reference ID. (DON'T CHANGE THIS!)
-const profileUserID = getDbItem('profileUserID', null)
+let profileUserID = getDbItem('profileUserID', null)
 // eg: Keyla James
 let profileName = getDbItem('profileName', null)
 // eg: raspberrypi.local
@@ -581,10 +579,8 @@ $(window).on('keypress', function (event) {
     }
   }
 })
-$(document).ready(async function () {
-  // We will use the IndexDB, so connect to it now, and perform any upgrade options
-  PrepareIndexDB()
 
+async function fetchOptions() {
   // Load phoneOptions
   // =================
   // Note: These options can be defined in the containing HTML page, and simply defined as a global variable
@@ -605,14 +601,15 @@ $(document).ready(async function () {
   const options = await response.json();
 
   if (response.status >= 200 && response.status < 300) {
-    if (options.welcomeScreen !== undefined) {
-      welcomeScreen = options.welcomeScreen
-    }
     if (options.loadAlternateLang !== undefined) {
       loadAlternateLang = options.loadAlternateLang
     }
     if (options.profileName !== undefined) {
       profileName = options.profileName
+    }
+    if (options.profileId !== undefined) {
+      profileUserID = options.profileId
+      localDB.setItem('profileUserID', profileUserID)
     }
     if (options.imagesDirectory !== undefined) {
       imagesDirectory = options.imagesDirectory
@@ -638,11 +635,11 @@ $(document).ready(async function () {
     if (options.sipDomain !== undefined) {
       SipDomain = options.sipDomain
     }
-    if (options.SipUsername !== undefined) {
-      SipUsername = options.SipUsername
+    if (options.sipUsername !== undefined) {
+      SipUsername = options.sipUsername
     }
-    if (options.SipPassword !== undefined) {
-      SipPassword = options.SipPassword
+    if (options.sipPassword !== undefined) {
+      SipPassword = options.sipPassword
     }
     if (options.SingleInstance !== undefined) {
       SingleInstance = options.SingleInstance
@@ -936,6 +933,13 @@ $(document).ready(async function () {
       XmppChatGroupService = options.XmppChatGroupService
     }
   }
+}
+
+$(document).ready(async function () {
+  // We will use the IndexDB, so connect to it now, and perform any upgrade options
+  PrepareIndexDB()
+
+  await fetchOptions();
 
   // Single Instance Check
   if (SingleInstance === true) {
@@ -951,13 +955,17 @@ $(document).ready(async function () {
   // ==================
   $.getJSON(hostingPrefix + 'lang/en.json', function (data) {
     lang = data
-    if (typeof web_hook_on_language_pack_loaded !== 'undefined') web_hook_on_language_pack_loaded(lang)
+    if (typeof web_hook_on_language_pack_loaded !== 'undefined') {
+      web_hook_on_language_pack_loaded(lang)
+    }
     if (loadAlternateLang === true) {
       const userLang = GetAlternateLanguage()
       if (userLang !== '') {
         console.log('Loading Alternate Language Pack: ', userLang)
         $.getJSON(hostingPrefix + 'lang/' + userLang + '.json', function (alt_data) {
-          if (typeof web_hook_on_language_pack_loaded !== 'undefined') web_hook_on_language_pack_loaded(alt_data)
+          if (typeof web_hook_on_language_pack_loaded !== 'undefined') {
+            web_hook_on_language_pack_loaded(alt_data)
+          }
           lang = alt_data
         }).always(function () {
           console.log('Alternate Language Pack loaded: ', lang)
@@ -1870,25 +1878,13 @@ function SetStatusWindow () {
   })
 }
 
-function Logout () {
-  HidePopup()
-  Unregister()
-  localDB.setItem('WelcomeScreenAccept', 'no')
-  localDB.setItem('profileName', null)
-  localDB.setItem('SipUsername', null)
-  localDB.setItem('SipPassword', null)
-  InitUserBuddies()
-  window.location.reload()
-}
-
 // Init UI
 // =======
 function InitUi () {
-  // Set the following to null to disable
-  welcomeScreen = `<div class="UiWindowField">${lang.select_user_profile}</div>`
-
   // Custom Web hook
-  if (typeof web_hook_on_before_init !== 'undefined') web_hook_on_before_init(phoneOptions)
+  if (typeof web_hook_on_before_init !== 'undefined') {
+    web_hook_on_before_init(phoneOptions)
+  }
 
   ApplyThemeColor()
 
@@ -2075,38 +2071,6 @@ function InitUi () {
 
   UpdateUI()
 
-  // Show Welcome Screen
-  if (welcomeScreen) {
-    if (localDB.getItem('WelcomeScreenAccept') !== 'yes') {
-      const profiles = [
-        { name: 'Julien 1', extension: '401' },
-        { name: 'Julien 2', extension: '402' },
-        { name: 'Julien 3', extension: '403' },
-        { name: 'Julien 4', extension: '404' },
-        { name: 'DTC 1', extension: '501' },
-        { name: 'DTC 2', extension: '502' },
-        { name: 'DTC 3', extension: '503' },
-        { name: 'DTC 4', extension: '504' }
-      ]
-      const buttons = profiles.map((profile) => {
-        return {
-          text: profile.name,
-          onClick: function () {
-            localDB.setItem('WelcomeScreenAccept', 'yes')
-            localDB.setItem('profileName', profile.name)
-            localDB.setItem('SipUsername', profile.extension)
-            localDB.setItem('SipPassword', 'modulotech')
-            localDB.setItem('profileUserID', uID())
-            window.location.reload()
-          }
-        }
-      })
-      OpenWindowWithButtonArray(welcomeScreen, lang.welcome, 480, 600, true, false, buttons, null, null)
-
-      return
-    }
-  }
-
   // Check if you account is created
   if (profileUserID === null) {
     ShowMyProfile()
@@ -2166,9 +2130,6 @@ function ShowMyProfileMenu (obj) {
     items.push({ icon: 'fa fa-comments', text: lang.set_status, value: 9 })
   }
 
-  items.push({ icon: null, text: '-' })
-  items.push({ icon: 'fa fa-sign-out', text: lang.logout, value: 10 })
-
   const menu = {
     selectEvent: function (event, ui) {
       const id = ui.item.attr('value')
@@ -2202,9 +2163,6 @@ function ShowMyProfileMenu (obj) {
           break
         case '9':
           SetStatusWindow()
-          break
-        case '10':
-          Logout()
           break
         default:
           break
@@ -2581,7 +2539,9 @@ function Register () {
 }
 
 function Unregister (skipUnsubscribe) {
-  if (userAgent === null || !userAgent.isRegistered()) return
+  if (userAgent === null || !userAgent.isRegistered()) {
+    return
+  }
 
   if (skipUnsubscribe === true) {
     console.log('Skipping Unsubscribe')
@@ -4903,7 +4863,9 @@ function SubscribeBuddy (buddyObj) {
 }
 
 function UnsubscribeAll () {
-  if (!userAgent.isRegistered()) return
+  if (!userAgent.isRegistered()) {
+    return
+  }
 
   console.log('Unsubscribe from voicemail Messages...')
   UnsubscribeVoicemail()
@@ -12406,7 +12368,10 @@ function ShowMyProfile () {
       }
 
       // The profileUserID identifies users
-      if (localDB.getItem('profileUserID') === null) localDB.setItem('profileUserID', uID()) // For first time only
+      if (localDB.getItem('profileUserID') === null) {
+        // For first time only
+        localDB.setItem('profileUserID', uID())
+      }
 
       // 1 Account
       if (EnableAccountSettings) {

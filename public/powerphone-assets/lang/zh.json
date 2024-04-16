@@ -8,7 +8,6 @@
     "do_no_disturb":"请勿打扰",
     "call_waiting":"呼叫等待",
     "record_all_calls":"记录所有通话",
-    "logout": "Log out",
     "extension_number":"分机号",
     "email":"电子邮件",
     "mobile":"移动电话",
@@ -307,6 +306,5 @@
     "pin_to_top" : "固定",
     "voice_mail" : "语音信箱",
     "you_have_new_voice_mail" : "您有 {0} 条新语音邮件消息。",
-    "new_voice_mail" : "新语音信箱留言",
-"select_user_profile" : "Sélectionnez votre profil utilisateur"
+    "new_voice_mail" : "新语音信箱留言"
 }

@@ -7,7 +7,6 @@
     "auto_answer" : "Réponse automatique",
     "do_no_disturb" : "Ne pas déranger",
     "call_waiting" : "Appel en attente",
-    "logout": "Déconnexion",
     "record_all_calls" : "Enregistrer tous les appels",
     "extension_number" : "Numéro d'extension",
     "email" : "Email",
@@ -306,6 +305,5 @@
     "delete_duddy_data" : "Supprimer l'historique",
     "pin_to_top" : "Épinglé",
     "voice_mail" : "Messagerie vocale",
-    "you_have_new_voice_mail" : "Vous avez {0} nouveaux messages vocaux.",
-    "select_user_profile" : "Sélectionnez votre profil utilisateur"
+    "you_have_new_voice_mail" : "Vous avez {0} nouveaux messages vocaux."
 }

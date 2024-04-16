@@ -8,7 +8,6 @@
     "do_no_disturb" : "Niet storen",
     "call_waiting" : "Wisselgesprek",
     "record_all_calls" : "Alle gesprekken opnemen",
-    "logout": "Log out",
     "extension_number" : "Extensie nummer",
     "email" : "E-mailadres",
     "mobile" : "Mobiel",
@@ -307,6 +306,5 @@
     "pin_to_top" : "Vastgezet",
     "voice_mail" : "VoiceMail",
     "you_have_new_voice_mail" : "U heeft {0} nieuwe VoiceMail-berichten.",
-    "new_voice_mail" : "Nieuw voicemailbericht",
-"select_user_profile" : "Sélectionnez votre profil utilisateur"
+    "new_voice_mail" : "Nieuw voicemailbericht"
 }

@@ -8,7 +8,6 @@
     "do_no_disturb" : "Não Perturbe",
     "call_waiting" : "Chamada em Espera",
     "record_all_calls" : "Gravar todas as chamadas",
-    "logout": "Log out",
     "extension_number" : "Número do Ramal",
     "email" : "E-mail",
     "mobile" : "Celular",
@@ -307,6 +306,5 @@
     "pin_to_top" : "Fixado",
     "voice_mail" : "Correio de voz",
     "you_have_new_voice_mail" : "Você tem {0} novas mensagens de correio de voz.",
-    "new_voice_mail" : "Nova mensagem de correio de voz",
-"select_user_profile" : "Sélectionnez votre profil utilisateur"
+    "new_voice_mail" : "Nova mensagem de correio de voz"
 }

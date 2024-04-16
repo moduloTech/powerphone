@@ -8,7 +8,6 @@
     "do_no_disturb" : "邪魔しない様に",
     "call_waiting" : "電話が待っている",
     "record_all_calls" : "全ての電話を録音する",
-    "logout": "Log out",
     "extension_number" : "内線番号",
     "email" : "メールアドレス",
     "mobile" : "携帯",
@@ -307,6 +306,5 @@
     "pin_to_top" : "固定された",
     "voice_mail" : "ボイスメール",
     "you_have_new_voice_mail" : "{0} 件の新しいボイスメール メッセージがあります。",
-    "new_voice_mail" : "新しいボイスメール メッセージ",
-"select_user_profile" : "Sélectionnez votre profil utilisateur"
+    "new_voice_mail" : "新しいボイスメール メッセージ"
 }

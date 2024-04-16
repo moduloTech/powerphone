@@ -8,7 +8,6 @@
     "do_no_disturb" : "No molestar",
     "call_waiting" : "Llamada en espera",
     "record_all_calls" : "Grabar todas las llamadas",
-    "logout": "Log out",
     "extension_number" : "Número de extensión",
     "email" : "Email",
     "mobile" : "Móvil",
@@ -307,6 +306,5 @@
     "pin_to_top" : "Fijado",
     "voice_mail" : "Mensaje de voz",
     "you_have_new_voice_mail" : "Tienes {0} nuevos mensajes de correo de voz.",
-    "new_voice_mail" : "Nuevo mensaje de correo de voz",
-"select_user_profile" : "Sélectionnez votre profil utilisateur"
+    "new_voice_mail" : "Nuevo mensaje de correo de voz"
 }

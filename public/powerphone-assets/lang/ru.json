@@ -8,7 +8,6 @@
     "do_no_disturb": "Не беспокоить",
     "call_waiting": "Ожидание вызова",
     "record_all_calls": "Запись всех вызовов",
-    "logout": "Log out",
     "extension_number": "Добавочный номер",
     "email": "Эл. адрес",
     "mobile": "мобильный",
@@ -307,6 +306,5 @@
     "pin_to_top" : "Закреплено",
     "voice_mail" : "Голосовая почта",
     "you_have_new_voice_mail" : "У вас {0} новых сообщений голосовой почты.",
-    "new_voice_mail" : "Новое сообщение голосовой почты",
-"select_user_profile" : "Sélectionnez votre profil utilisateur"
+    "new_voice_mail" : "Новое сообщение голосовой почты"
 }
