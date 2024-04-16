@@ -5,7 +5,7 @@ module Powerphone
   module Config
 
     Action = Struct.new(:options, :block)
-    SipUser = Struct.new(:profile_name, :password, :extension, :profile_id)
+    SipUser = Struct.new(:profile_id, :profile_name, :extension, :password, :language)
 
     class EngineConfiguration
 
@@ -47,13 +47,41 @@ module Powerphone
           if block.nil?
             sip_user = SipUser.new
             caller.instance_exec(sip_user, &@sip_user_evaluator)
-            # TODO: Validate the block and raise if an option is missing.
-            sip_user
+            validate_sip_user(sip_user)
           elsif caller.nil?
             @sip_user_evaluator = block
           else
             raise ArgumentError, 'wrong number of arguments (given 1, expected 0 when block given)'
           end
+        end
+
+        private
+
+        def validate_sip_user(sip_user)
+          # Required values
+          %i[profile_id extension password].each do |attribute|
+            if sip_user.send(attribute).nil?
+              raise Powerphone::Errors::ConfigurationRequiredError.new("sip_user/#{attribute}")
+            end
+          end
+
+          # Optional values
+          sip_user.profile_name ||= SecureRandom.alphanumeric
+          sip_user.language = validate_language(sip_user.language)
+
+          sip_user
+        end
+
+        VALID_LANGUAGES = %w[fr ja zh ru tr nl es de pl pt].freeze
+        def validate_language(language)
+          return 'auto' if language.blank?
+
+          # Handle symbols (#to_s) and Rails format (:fr_FR)
+          language = language.to_s.gsub('_', '-')
+          language_code, _country_code = language.split('-')
+          return 'auto' unless VALID_LANGUAGES.include?(language_code)
+
+          language
         end
 
       end

@@ -18,3 +18,4 @@ json.profileId @sip_user.profile_id
 json.profileName @sip_user.profile_name
 json.sipUsername @sip_user.extension
 json.sipPassword @sip_user.password
+json.language @sip_user.language

@@ -37,7 +37,7 @@ const localDB = window.localStorage
 // Enables searching and loading for the additional language packs other than /en.json
 let loadAlternateLang = getDbItem('loadAlternateLang', '0') === '1'
 // Defines the language packs (.json) available in /lang/ folder
-const availableLang = ['fr', 'ja', 'zh-hans', 'zh', 'ru', 'tr', 'nl', 'es', 'de', 'pl', 'pt-br']
+const availableLang = ['fr', 'ja', 'zh-hans', 'zh', 'ru', 'tr', 'nl', 'es', 'de', 'pl', 'pt-br', 'pt']
 
 /**
  * Image Assets
@@ -433,7 +433,7 @@ function UserLocale () {
   }
 }
 
-function GetAlternateLanguage () {
+function GetAlternateLanguage() {
   // "en", "en-US", "fr", "fr-FR", "es-ES", etc.
   let userLanguage = window.navigator.language
   // langtag = language["-"script]["-" region] *("-" variant) *("-" extension) ["-" privateuse]
@@ -827,8 +827,8 @@ async function fetchOptions() {
     if (options.DisplayTimeFormat !== undefined) {
       DisplayTimeFormat = options.DisplayTimeFormat
     }
-    if (options.Language !== undefined) {
-      Language = options.Language
+    if (options.language !== undefined) {
+      Language = options.language
     }
     if (options.BuddySortBy !== undefined) {
       BuddySortBy = options.BuddySortBy
@@ -3433,10 +3433,18 @@ function onInviteProgress (lineObj, response) {
     $('#line-' + lineObj.LineNumber + '-msg').html(lang.ringing)
 
     let soundFile = audioBlobs.EarlyMedia_European
-    if (UserLocale().indexOf('us') > -1) soundFile = audioBlobs.EarlyMedia_US
-    if (UserLocale().indexOf('gb') > -1) soundFile = audioBlobs.EarlyMedia_UK
-    if (UserLocale().indexOf('au') > -1) soundFile = audioBlobs.EarlyMedia_Australia
-    if (UserLocale().indexOf('jp') > -1) soundFile = audioBlobs.EarlyMedia_Japan
+    if (UserLocale().indexOf('us') > -1) {
+      soundFile = audioBlobs.EarlyMedia_US
+    }
+    if (UserLocale().indexOf('gb') > -1) {
+      soundFile = audioBlobs.EarlyMedia_UK
+    }
+    if (UserLocale().indexOf('au') > -1) {
+      soundFile = audioBlobs.EarlyMedia_Australia
+    }
+    if (UserLocale().indexOf('jp') > -1) {
+      soundFile = audioBlobs.EarlyMedia_Japan
+    }
 
     // Play Early Media
     console.log('Audio:', soundFile.url)
