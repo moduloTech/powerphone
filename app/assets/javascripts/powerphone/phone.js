@@ -8927,7 +8927,7 @@ function handleDialInput (obj, event) {
 
 function dialOnkeydown (event, obj, buddy) {
   const keycode = (event.keyCode ? event.keyCode : event.which)
-  if (keycode === '13') {
+  if (keycode === 13) {
     event.preventDefault()
 
     if (event.ctrlKey && EnableVideoCalling === true) {
